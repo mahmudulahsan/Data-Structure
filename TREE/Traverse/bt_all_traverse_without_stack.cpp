@@ -1,6 +1,6 @@
 
-#include<stdio.h>
-#include<malloc.h>
+#include<iostream>
+using namespace std;
 
 typedef struct node Node;
 
@@ -28,7 +28,6 @@ Node *create_node(int ITEM){
 //  1   6     8
 //     / \   / \
 //    5  10 3   4
-//
 
 Node *create_tree(){
     Node *two = create_node(2);
@@ -63,7 +62,7 @@ Node *create_tree(){
 
 //preorder traversal of the above tree
 void pre_order(Node *node){
-    printf("%d \t", node->data);
+    printf("%d ", node->data);
 
     if(node->left != NULL){
         pre_order(node->left);
@@ -82,7 +81,7 @@ void post_order(Node *node){
     if(node->right != NULL){
         post_order(node->right);
     }
-    printf("%d \t", node->data);
+    printf("%d ", node->data);
 }
 
 //inorder traversal of the above tree
@@ -91,7 +90,7 @@ void in_order(Node *node){
     if(node->left != NULL){
         in_order(node->left);
     }
-    printf("%d \t", node->data);
+    printf("%d ", node->data);
     if(node->right != NULL){
         in_order(node->right);
     }
@@ -102,13 +101,13 @@ int main()
 {
     Node *root = create_tree();
 
-    printf("preorder travese: \n");
+    cout<<"preorder travese: "<<endl;
     pre_order(root);
 
-    printf("\n\npostrder travese: \n");
+    cout<<"\n\npostrder travese: \n";
     post_order(root);
 
-    printf("\n\ninorder travese: \n");
+    cout<<"\n\ninorder travese: \n";
     in_order(root);
 
     return 0;

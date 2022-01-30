@@ -1,5 +1,6 @@
-#include<stdio.h>
-#include<malloc.h>
+#include<iostream>
+
+using namespace std;
 
 typedef struct node Node;
 
@@ -10,7 +11,8 @@ struct node{
 };
 
 Node *create_node(int ITEM){
-    Node *new_node = (Node *)malloc(sizeof(Node));
+    //Node *new_node = (Node *)malloc(sizeof(Node)); // for c
+    Node *new_node = new Node();
 
     new_node->data = ITEM;
     new_node->left = NULL;
@@ -63,7 +65,7 @@ int main()
 {
     Node *random_node = create_tree();
 
-    printf("%d\n", random_node->right->data);
+    cout<<random_node->right->data<<endl;
 
     return 0;
 }
