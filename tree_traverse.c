@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<malloc.h>
 
@@ -55,15 +56,60 @@ Node *create_tree(){
     eight->left = three;
     eight->right = four;
 
-    return seven; //i can return random node and print child and data of that node
+    return two; //returning the root of the tree
+                //i can return random node and print child and data of that node
+}
+
+
+//preorder traversal of the above tree
+void pre_order(Node *node){
+    printf("%d \t", node->data);
+
+    if(node->left != NULL){
+        pre_order(node->left);
+    }
+    if(node->right != NULL){
+        pre_order(node->right);
+    }
+}
+
+//postorder traversal of the above tree
+void post_order(Node *node){
+
+    if(node->left != NULL){
+        post_order(node->left);
+    }
+    if(node->right != NULL){
+        post_order(node->right);
+    }
+    printf("%d \t", node->data);
+}
+
+//inorder traversal of the above tree
+void in_order(Node *node){
+
+    if(node->left != NULL){
+        in_order(node->left);
+    }
+    printf("%d \t", node->data);
+    if(node->right != NULL){
+        in_order(node->right);
+    }
 }
 
 
 int main()
 {
-    Node *random_node = create_tree();
+    Node *root = create_tree();
 
-    printf("%d\n", random_node->right->data);
+    printf("preorder travese: \n");
+    pre_order(root);
+
+    printf("\n\npostrder travese: \n");
+    post_order(root);
+
+    printf("\n\ninorder travese: \n");
+    in_order(root);
 
     return 0;
 }
