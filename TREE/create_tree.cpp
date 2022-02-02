@@ -29,7 +29,6 @@ Node *create_node(int ITEM){
 //  1   6     8
 //     / \   / \
 //    5  10 3   4
-//
 
 Node *create_tree(){
     Node *two = create_node(2);
