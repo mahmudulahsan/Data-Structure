@@ -58,31 +58,41 @@ Node *create_tree(){
                 //i can return random node and print child and data of that node
 }
 
-void insertInBST(Node *root, int ITEM){
-    Node *prev = NULL;
-    while(root){
-        prev = root;
-        if(ITEM==root->data){
-            return;
-        }
-        else if(ITEM>root->data){
-            root = root->right;
-        }
-        else{
-            root = root->left;
-        }
+//find inorder predecessor
+Node *findInOrderPredecessor(Node *root){
+    root = root->left;
+    while(root->right!=NULL){
+        root = root->right;
     }
-    //at this point root is null
+    return root;
+}
 
-    //and now we store ITEM in newNode
-     Node *newNode = create_node(ITEM);
+//delete a node from BST
+Node *deleteInBST(Node *root, int ITEM){
 
-     if(ITEM>prev->data){
-        prev->right = newNode;
-     }
-     else{
-        prev->left = newNode;
-     }
+    Node *in_pre;
+    if(root == NULL){
+        return NULL;
+    }
+    if(root->left == NULL && root->right == NULL){
+        delete root;
+        return NULL;
+    }
+
+    //searching for the node to be deleted
+    if(ITEM < root->data){
+        root->left = deleteInBST(root->left, ITEM);
+    }
+    else if(ITEM > root->data){
+        root->right = deleteInBST(root->right, ITEM);
+    }
+    //deletion when the node is found
+    else{
+        in_pre = findInOrderPredecessor(root);
+        root->data = in_pre->data;
+        root->left = deleteInBST(root->left, in_pre->data);
+    }
+    return root;
 }
 
 void in_order(Node *node){
@@ -101,24 +111,27 @@ int main()
 {
     Node *root = create_tree();
 
-    int ITEM;
-    cout<<"Enter a value: ";
-    cin>>ITEM;
-
-    insertInBST(root, ITEM);
-
+    cout<<"Inorder Traversal: ";
     in_order(root); //ensuring insertion is right or wrong
 
     cout<<endl;
 
-    cout<<root->right->left->left->data<<endl; //checking the value if 11 is inserted
+    while(1){
+        int ITEM;
+        cout<<"Enter a value: ";
+        cin>>ITEM;
 
+        deleteInBST(root, ITEM);
 
-
+        cout<<"Inorder Traversal(After deletion): ";
+        in_order(root);
+        cout<<endl;
+    }
 
 
 
 
     return 0;
 }
+
 
